@@ -1,0 +1,19 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "Lenovo Legion5 Pro",
+      "price": 1300
+    },
+    {
+      "id": 2,
+      "title": "Acer Predator Helios 300",
+      "price": 2200
+    },
+    {
+      "id": 3,
+      "title": "HP Victous 15",
+      "price": 1700
+    }
+  ]
+}
