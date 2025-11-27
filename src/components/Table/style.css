@@ -1,0 +1,29 @@
+table {
+  width: min(1200px, 90%);
+  margin: 0 auto;
+  border: 1px solid #ddd;
+  border-collapse: collapse;
+}
+
+table tr td {
+  border: 1px solid #ddd;
+  text-align: center;
+  padding: 4px 0;
+}
+
+table tr:nth-child(even) {
+  background-color: rgb(191, 203, 209);
+}
+
+table tr td .btn__wrapper {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+}
+
+table tr td .btn__wrapper button {
+  padding: 2px 12px;
+  border: 1px solid #999;
+  cursor: pointer;
+}
