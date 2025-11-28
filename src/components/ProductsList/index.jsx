@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import Table from "../Table";
 import { PRODUCTS_COLUMNS } from "../../constant/productsTableData";
 import axios from "axios";
 import { API_URL } from "../../config/api";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { PATHS } from "../../router/paths";
-import './style.css'
+import "./style.css";
 
 const ProductsList = () => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
@@ -19,7 +20,7 @@ const ProductsList = () => {
         const { data } = await axios.get(`${API_URL}/products`);
         console.log(data);
         setProducts(data);
-      } catch (err) {   
+      } catch (err) {
         setError(err);
       } finally {
         setIsLoading(false);
@@ -27,21 +28,27 @@ const ProductsList = () => {
     })();
   }, []);
 
-  const handleDelete = () => {
+  const handleDelete = () => {};
 
-  }
-
-  const handleEdit = () => {
-
-  }
+  const handleEdit = () => {};
 
   if (error) {
     return <Navigate to={PATHS.ERROR.PAGE_NOT_FOUND} replace={true} />;
   }
 
+  // ? product - [row]
+  const onClick = (product) => {
+    navigate(PATHS.PRODUCT.VIEW.replace(":id", product.id))
+  };
+
   return (
     <div className="wrapper__table">
-      <Table columns={PRODUCTS_COLUMNS(handleDelete, handleEdit)} data={products} isLoading={isLoading} />
+      <Table
+        columns={PRODUCTS_COLUMNS(handleDelete, handleEdit)}
+        data={products}
+        isLoading={isLoading}
+        onRowClick={onClick}
+      />
     </div>
   );
 };

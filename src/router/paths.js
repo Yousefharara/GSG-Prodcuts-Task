@@ -2,7 +2,7 @@ export const PATHS = {
   HOME: "/",
   PRODUCT: {
     ROOT: "/products",
-    VIEW: "/product/:id/edit",
+    VIEW: "/product/:id",
     CRAETE: "/product/create",
     EDIT: "/product/:id/edit",
   },

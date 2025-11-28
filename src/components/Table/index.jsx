@@ -14,7 +14,7 @@ const Table = ({ columns, data, onRowClick = () => "", isLoading }) => {
         {!isLoading && (
           <tbody>
             {data.map((row) => (
-              <tr key={row.id} onClick={onRowClick}>
+              <tr id={row.id} key={row.id} onClick={() => onRowClick(row)}>
                 {columns.map((col) => (
                   <td key={col.key}>{col.render ? col.render() : row[col.key]}</td>
                 ))}
