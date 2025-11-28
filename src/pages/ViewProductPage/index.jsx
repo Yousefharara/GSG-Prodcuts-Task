@@ -1,27 +1,15 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import { API_URL } from "../../config/api";
 import { PATHS } from "../../router/paths";
+import UseApi from "../../hooks/UseApi";
 
-const ViewProduct = () => {
+const ViewProductPage = () => {
   const { id } = useParams();
-  const [product, setProduct] = useState("");
-  const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const { getById, product, isLoading, error } = UseApi(`${API_URL}`);
 
   useEffect(() => {
-    (async () => {
-      try {
-        setIsLoading(true);
-        const { data } = await axios.get(`${API_URL}/products/${id}`);
-        setProduct(data);
-      } catch (err) {
-        setError(err);
-      } finally {
-        setIsLoading(false);
-      }
-    })();
+    getById(id);
   }, [id]);
 
   if (error) {
@@ -42,4 +30,4 @@ const ViewProduct = () => {
   );
 };
 
-export default ViewProduct;
+export default ViewProductPage;

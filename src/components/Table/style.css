@@ -26,4 +26,7 @@ table tr td .btn__wrapper button {
   padding: 2px 12px;
   border: 1px solid #999;
   cursor: pointer;
+  border-radius: 3px;
+  font-size: 13px;
+  letter-spacing: .3px;
 }

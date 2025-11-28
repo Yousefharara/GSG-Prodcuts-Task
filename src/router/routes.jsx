@@ -1,7 +1,8 @@
-import CreateProduct from "../pages/CreateProduct";
+import CreateProductPage from "../pages/CreateProductPage";
+import EditProductPage from "../pages/EditProductPage";
 import HomePage from "../pages/HomePage";
 import ProductsTableList from "../pages/ProductsTableList/index.";
-import ViewProduct from "../pages/ViewProduct";
+import ViewProductPage from "../pages/ViewProductPage";
 import { PATHS } from "./paths";
 import { Navigate } from "react-router-dom";
 
@@ -16,11 +17,15 @@ const routes = [
   },
   {
     path: PATHS.PRODUCT.VIEW,
-    element: <ViewProduct />,
+    element: <ViewProductPage />,
   },
   {
     path: PATHS.PRODUCT.EDIT,
-    element: <CreateProduct />,
+    element: <EditProductPage />,
+  },
+  {
+    path: PATHS.PRODUCT.CRAETE,
+    element: <CreateProductPage />,
   },
   {
     path: PATHS.ERROR.PAGE_NOT_FOUND,

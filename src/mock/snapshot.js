@@ -1,4 +1,4 @@
-{
+const snap = {
   "products": [
     {
       "id": "1",
@@ -8,12 +8,12 @@
     {
       "id": "2",
       "title": "Macbook Pro M5",
-      "price": "9500"
+      "price": "3200"
     },
     {
-      "id": "06da",
-      "title": "HP probook  2024",
-      "price": "1350"
+      "id": "3",
+      "title": "HP Victous 14",
+      "price": "1200"
     }
   ]
 }

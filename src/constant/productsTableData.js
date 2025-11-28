@@ -12,15 +12,15 @@ export const PRODUCTS_COLUMNS  = (handleDelete, handleEdit) => [
     {
         key: 'price',
         title: 'Price',
-        // render: () => ''   
+        render: (data) => `${data.price} $`   
     },
     {
         key: 'action',
         title: 'Action',
-        render: () => (
+        render: (row) => (
             <div className="btn__wrapper" onClick={(e) => e.stopPropagation()}>
-                <button onClick={handleDelete}>Delete</button>
-                <button onClick={handleEdit}>Edit</button>
+                <button onClick={() => handleDelete(row)}>Delete</button>
+                <button onClick={() => handleEdit(row)}>Edit</button>
             </div>
         )
     }
