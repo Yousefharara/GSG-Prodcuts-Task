@@ -1,26 +1,14 @@
-import React, { useState } from "react";
 import ProductForm from "../../components/ProductForm";
-import axios from "axios";
 import { API_URL } from "../../config/api";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { PATHS } from "../../router/paths";
+import UseApi from "../../hooks/UseApi";
 
 const CreateProductPage = () => {
-  // const [product, setProduct] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
+  const { post, isLoading, error } = UseApi(`${API_URL}`);
 
   const handleCreateProduct = async (data) => {
-    try {
-      setIsLoading(true);
-      await axios.post(`${API_URL}`, data);
-      navigate(PATHS.PRODUCT.ROOT)
-    } catch (err) {
-      setError(err);
-    } finally {
-      setIsLoading(false);
-    }
+    post(data, PATHS.PRODUCT.ROOT);
   };
 
   if (error) {
@@ -30,7 +18,7 @@ const CreateProductPage = () => {
   return (
     <div>
       Create Product
-      <ProductForm  handleOnSubmit={handleCreateProduct} isLoading={isLoading} />
+      <ProductForm handleOnSubmit={handleCreateProduct} isLoading={isLoading} />
     </div>
   );
 };

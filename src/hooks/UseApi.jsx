@@ -36,7 +36,7 @@ const UseApi = (url, config) => {
   const post = async (body, path) => {
     try {
       setIsLoading(true);
-      const res = await axios.get(url, body, config);
+      const res = await axios.post(url, body, config);
       setProduct((prev) => [...prev, { ...res.data }]);
       if (path) {
         navigate(path);
