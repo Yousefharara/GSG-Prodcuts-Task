@@ -6,7 +6,7 @@ import UseApi from "../../hooks/UseApi";
 
 const ViewProductPage = () => {
   const { id } = useParams();
-  const { getById, product, isLoading, error } = UseApi(`${API_URL}`);
+  const { getById, product, isLoading, error } = UseApi(`${API_URL}/products`);
 
   useEffect(() => {
     getById(id);

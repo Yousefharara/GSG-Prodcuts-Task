@@ -6,7 +6,7 @@ import { PATHS } from "../../router/paths";
 import UseApi from "../../hooks/UseApi";
 
 const EditProductPage = () => {
-  const { patch, getById, product, isLoading, error } = UseApi(`${API_URL}`);
+  const { patch, getById, product, isLoading, error } = UseApi(`${API_URL}/products`);
   const { id } = useParams();
 
   useEffect(() => {

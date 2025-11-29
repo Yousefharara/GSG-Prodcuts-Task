@@ -13,7 +13,7 @@ const UseApi = (url, config) => {
     try {
       setIsLoading(true);
       const res = await axios.get(url, config);
-      setData(res.data);
+      setData(res?.data?.data || res?.data);
     } catch (err) {
       setError(err);
     } finally {
@@ -25,7 +25,7 @@ const UseApi = (url, config) => {
     try {
       setIsLoading(true);
       const res = await axios.get(`${url}/${id}`, config);
-      setProduct(res.data);
+      setProduct(res?.data?.data || res?.data);
     } catch (err) {
       setError(err);
     } finally {
@@ -33,10 +33,10 @@ const UseApi = (url, config) => {
     }
   };
 
-  const post = async (body, path) => {
+  const post = async (body, path, postConfig) => {
     try {
       setIsLoading(true);
-      const res = await axios.post(url, body, config);
+      const res = await axios.post(url, body, {...config, postConfig});
       setProduct((prev) => [...prev, { ...res.data }]);
       if (path) {
         navigate(path);
@@ -48,10 +48,10 @@ const UseApi = (url, config) => {
     }
   };
 
-  const patch = async (body, path) => {
+  const patch = async (body, path, patchConfig) => {
     try {
       setIsLoading(true);
-      const res = await axios.patch(url, body, config);
+      const res = await axios.patch(url, body, {...config, ...patchConfig});
       setData((prev) =>
         prev.map((item) => (item.id === res.data.id ? res.data : item))
       );
@@ -65,10 +65,10 @@ const UseApi = (url, config) => {
     }
   };
 
-  const del = async (id) => {
+  const del = async (id, delConfig) => {
     try {
       setIsLoading(true);
-      await axios.delete(`${url}/${id}`, config);
+      await axios.delete(`${url}/${id}`, {...config, ...delConfig});
       setData((prev) => prev.filter((item) => item.id !== id));
     } catch (err) {
       setError(err);

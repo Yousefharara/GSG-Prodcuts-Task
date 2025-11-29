@@ -10,7 +10,7 @@ import UseApi from "../../hooks/UseApi";
 
 const ProductsList = () => {
   const navigate = useNavigate();
-  const { getAll, del, data, error, isLoading } = UseApi(`${API_URL}`);
+  const { getAll, del, data, error, isLoading } = UseApi(`${API_URL}/products`);
 
   useEffect(() => {
     getAll();

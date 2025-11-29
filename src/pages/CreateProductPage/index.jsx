@@ -5,7 +5,7 @@ import { PATHS } from "../../router/paths";
 import UseApi from "../../hooks/UseApi";
 
 const CreateProductPage = () => {
-  const { post, isLoading, error } = UseApi(`${API_URL}`);
+  const { post, isLoading, error } = UseApi(`${API_URL}/products`);
 
   const handleCreateProduct = async (data) => {
     post(data, PATHS.PRODUCT.ROOT);
