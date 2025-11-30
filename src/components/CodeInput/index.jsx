@@ -28,6 +28,8 @@ const CodeInput = () => {
   const [eleRefs, setEleRefs] = useState([]);
   const [inputs, setInputs] = useState([]);
 
+  const [modify, setModify] = useState('MODIFY_GITHUB')
+
   useEffect(() => {
     setEleRefs(INPUT_DATA.map((_) => createRef(null)));
     setInputs(
