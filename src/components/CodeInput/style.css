@@ -25,3 +25,19 @@
     caret-color: transparent;
     pointer-events: none;
 }
+
+.code__input .input input.success__code {
+    border-color: #219c4a;
+}
+.code__input .input input.success__code:focus {
+    border-color: #219c4a;
+    outline-color: #219c4a;
+}
+
+.code__input .input input.fail__code {
+    border-color: #9c2121;
+}
+.code__input .input input.fail__code:focus {
+    border-color: #9c2121;
+    outline-color: #9c2121;
+}

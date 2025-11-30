@@ -34,12 +34,19 @@ const INPUT_DATA = [
   },
 ];
 
+let SUCCESS_CODE = "You123";
+
 const CodeInput = () => {
   const [eleRefs, setEleRefs] = useState([]);
   const [inputs, setInputs] = useState([]);
   const [code, setCode] = useState("");
 
   useEffect(() => {
+    SUCCESS_CODE = "Yousef";
+  }, []);
+
+  useEffect(() => {
+    // ! Foundation just one time
     setEleRefs(INPUT_DATA.map((_) => createRef(null)));
     setInputs(
       INPUT_DATA.map((item) => ({
@@ -81,13 +88,19 @@ const CodeInput = () => {
       <div className="input">
         {INPUT_DATA.map((input) => (
           <input
-
             key={input.id}
             ref={eleRefs[input.id - 1]}
             value={inputs[input.id - 1]?.value || ""}
             type={input.type}
             onChange={handleOnChange}
             name={input.name}
+            className={
+              code.length === INPUT_DATA.length
+                ? SUCCESS_CODE === code
+                  ? "success__code"
+                  : "fail__code"
+                : ""
+            }
           />
         ))}
       </div>
