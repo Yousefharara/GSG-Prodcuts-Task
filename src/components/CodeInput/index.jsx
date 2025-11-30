@@ -22,11 +22,22 @@ const INPUT_DATA = [
     name: 4,
     type: "text",
   },
+  {
+    id: 5,
+    name: 5,
+    type: "text",
+  },
+  {
+    id: 6,
+    name: 6,
+    type: "text",
+  },
 ];
 
 const CodeInput = () => {
   const [eleRefs, setEleRefs] = useState([]);
   const [inputs, setInputs] = useState([]);
+  const [code, setCode] = useState("");
 
   useEffect(() => {
     setEleRefs(INPUT_DATA.map((_) => createRef(null)));
@@ -37,12 +48,19 @@ const CodeInput = () => {
       }))
     );
   }, []);
-  console.log(eleRefs);
-  console.log(inputs);
 
   useEffect(() => {
     eleRefs[0]?.current.focus();
   }, [eleRefs]);
+
+  useEffect(() => {
+    let messageCode = "";
+    inputs.map((input) => {
+      messageCode += input.value;
+      return null;
+    });
+    setCode(messageCode);
+  }, [inputs]);
 
   const handleOnChange = (e) => {
     let value = e.target.value.toString().slice(-1);
@@ -52,10 +70,8 @@ const CodeInput = () => {
     );
 
     if (!value) {
-      console.log("if is true : ", eleRefs[Number(id - 1)]?.current);
       eleRefs[Number(+id - 2)]?.current.focus();
     } else {
-      console.log("if is false : ", eleRefs[Number(+id)]?.current);
       eleRefs[Number(+id)]?.current.focus();
     }
   };
@@ -65,6 +81,7 @@ const CodeInput = () => {
       <div className="input">
         {INPUT_DATA.map((input) => (
           <input
+
             key={input.id}
             ref={eleRefs[input.id - 1]}
             value={inputs[input.id - 1]?.value || ""}
@@ -74,6 +91,7 @@ const CodeInput = () => {
           />
         ))}
       </div>
+      <p>{code}</p>
     </div>
   );
 };

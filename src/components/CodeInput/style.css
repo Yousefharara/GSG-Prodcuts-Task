@@ -13,10 +13,6 @@
     
 }
 
-.code__input .input input{
-    caret-color: transparent;
-}
-
 .code__input .input input {
     padding: 8px;
     border-radius: 8px;
@@ -26,4 +22,6 @@
     font-size: 30px;
     letter-spacing: 5px;
     text-align: center;
+    caret-color: transparent;
+    pointer-events: none;
 }
