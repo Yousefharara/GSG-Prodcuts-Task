@@ -41,6 +41,8 @@ const CodeInput = () => {
   const [inputs, setInputs] = useState([]);
   const [code, setCode] = useState("");
 
+  const [modify, setModify] = useState('MODIFY_GITHUB')
+
   useEffect(() => {
     SUCCESS_CODE = "Yousef";
   }, []);
