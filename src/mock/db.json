@@ -13,12 +13,17 @@
     {
       "id": "06da",
       "title": "HP probook  2024",
-      "price": "1350"
+      "price": "1050"
     },
     {
       "id": "d11b",
       "title": "Asus TUF gaming",
-      "price": "9000"
+      "price": "12000"
+    },
+    {
+      "id": "237f",
+      "title": "Lenovo IdeaPad",
+      "price": "750"
     }
   ]
 }

@@ -1,83 +1,147 @@
 import axios from "axios";
-import { useState } from "react";
+import { useReducer } from "react";
 import { useNavigate } from "react-router-dom";
 
+const INITIAL_VALUE = {
+  data: [],
+  product: {},
+  error: null,
+  isLoading: false,
+};
+
+const API_ACTION = {
+  DATA: "DATA",
+  PRODUCT: "PRODUCT",
+  ERROR: "ERROR",
+  IS_LOADING: "IS_LOADING",
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case API_ACTION.DATA: {
+      return {
+        ...state,
+        data: [...action.payload],
+      };
+    }
+    case API_ACTION.PRODUCT: {
+      return {
+        ...state,
+        product: {
+          ...action.payload,
+        },
+      };
+    }
+    case API_ACTION.ERROR: {
+      return {
+        ...state,
+        error: action.payload,
+      };
+    }
+    case API_ACTION.IS_LOADING: {
+      return {
+        ...state,
+        isLoading: action.payload,
+      };
+    }
+    default:
+      return state;
+  }
+};
+
 const UseApi = (url, config) => {
-  const [data, setData] = useState([]);
-  const [product, setProduct] = useState({});
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
+  const [state, dispatch] = useReducer(reducer, INITIAL_VALUE);
 
   const getAll = async () => {
     try {
-      setIsLoading(true);
+      dispatch({ type: API_ACTION.IS_LOADING, payload: true });
       const res = await axios.get(url, config);
-      setData(res?.data?.data || res?.data);
+      dispatch({
+        type: API_ACTION.DATA,
+        payload: res?.data?.data || res?.data,
+      });
     } catch (err) {
-      setError(err);
+      dispatch({ type: API_ACTION.ERROR, payload: err });
     } finally {
-      setIsLoading(false);
+      dispatch({ type: API_ACTION.IS_LOADING, payload: false });
     }
   };
 
   const getById = async (id) => {
     try {
-      setIsLoading(true);
+      dispatch({ type: API_ACTION.IS_LOADING, payload: true });
       const res = await axios.get(`${url}/${id}`, config);
-      setProduct(res?.data?.data || res?.data);
+      dispatch({
+        type: API_ACTION.PRODUCT,
+        payload: res?.data?.data || res?.data,
+      });
     } catch (err) {
-      setError(err);
+      dispatch({ type: API_ACTION.ERROR, payload: err });
     } finally {
-      setIsLoading(false);
+      dispatch({ type: API_ACTION.IS_LOADING, payload: false });
     }
   };
 
   const post = async (body, path, postConfig) => {
     try {
-      setIsLoading(true);
-      const res = await axios.post(url, body, {...config, postConfig});
-      setProduct((prev) => [...prev, { ...res.data }]);
+      dispatch({ type: API_ACTION.IS_LOADING, payload: true });
+      const res = await axios.post(url, body, { ...config, ...postConfig });
+      dispatch({
+        type: API_ACTION.PRODUCT,
+        payload: [...state.product, { ...res.data }],
+      });
       if (path) {
         navigate(path);
       }
     } catch (err) {
-      setError(err);
+      dispatch({ type: API_ACTION.ERROR, payload: err });
     } finally {
-      setIsLoading(false);
+      dispatch({ type: API_ACTION.IS_LOADING, payload: false });
     }
   };
 
-  const patch = async (body, path, patchConfig) => {
+  const patch = async (id, body, path, patchConfig) => {
     try {
-      setIsLoading(true);
-      const res = await axios.patch(url, body, {...config, ...patchConfig});
-      setData((prev) =>
-        prev.map((item) => (item.id === res.data.id ? res.data : item))
-      );
+      dispatch({ type: API_ACTION.IS_LOADING, payload: true });
+      const res = await axios.patch(`${url}/${id}`, body, {
+        ...config,
+        ...patchConfig,
+      });
+      dispatch({
+        type: API_ACTION.DATA,
+        payload: state.data.map((item) =>
+          item.id === res.data.id ? res.data : item
+        ),
+      });
       if (path) {
         navigate(path);
       }
     } catch (err) {
-      setError(err);
+      dispatch({ type: API_ACTION.ERROR, payload: err });
+      console.log("Error: ", state.error);
     } finally {
-      setIsLoading(false);
+      dispatch({ type: API_ACTION.IS_LOADING, payload: false });
     }
   };
 
   const del = async (id, delConfig) => {
     try {
-      setIsLoading(true);
-      await axios.delete(`${url}/${id}`, {...config, ...delConfig});
-      setData((prev) => prev.filter((item) => item.id !== id));
+      dispatch({ type: API_ACTION.IS_LOADING, payload: true });
+      await axios.delete(`${url}/${id}`, { ...config, ...delConfig });
+      dispatch({
+        type: API_ACTION.DATA,
+        payload: state.data.filter((item) => item.id !== id),
+      });
     } catch (err) {
-      setError(err);
+      dispatch({ type: API_ACTION.ERROR, payload: err });
     } finally {
-      setIsLoading(false);
+      dispatch({ type: API_ACTION.IS_LOADING, payload: false });
     }
   };
 
-  return { data, isLoading, error, product, getAll, getById, patch, del, post };
+  return { ...state, getAll, getById, patch, del, post };
 };
 
 export default UseApi;

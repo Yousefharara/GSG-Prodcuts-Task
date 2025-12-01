@@ -6,7 +6,9 @@ import { PATHS } from "../../router/paths";
 import UseApi from "../../hooks/UseApi";
 
 const EditProductPage = () => {
-  const { patch, getById, product, isLoading, error } = UseApi(`${API_URL}/products`);
+  const { patch, getById, product, isLoading, error } = UseApi(
+    `${API_URL}/products`
+  );
   const { id } = useParams();
 
   useEffect(() => {
@@ -14,7 +16,7 @@ const EditProductPage = () => {
   }, [id]);
 
   const handleEdit = async (data) => {
-    patch(data, PATHS.PRODUCT.ROOT);
+    patch(id, data, PATHS.PRODUCT.ROOT);
   };
 
   if (error) {
