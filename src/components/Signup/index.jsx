@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { ROLES } from "../../constant/Role";
+import axios from "axios";
+import { API_URL, AUTH_API } from "../../config/api";
 
 const INPUT_FORM_SIGN_UP = [
   {
@@ -24,16 +26,29 @@ const Signup = () => {
   });
   const { setRole, setUser } = useAuth();
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
-    if (formData.username === "yousefharara" && formData.password === "123") {
-      setUser(formData.username);
-      setRole(ROLES.USER);
-    } else if (formData.username === "admin" && formData.password === "admin") {
-      setUser("ADMIN_YOUSEF");
-      setRole(ROLES.ADMIN);
-    } else console.log("Incorrect Sign up !!");
+    try{
+      const res = await axios.post(`${'https://image-project.onrender.com'}/auth/signup`, formData)
+      console.log(res);
+    }catch(err) {
+      console.log(err);
+    }finally{
+      console.log('Done !!');
+    }
   };
+
+
+  // const handleOnSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (formData.username === "yousefharara" && formData.password === "123") {
+  //     setUser(formData.username);
+  //     setRole(ROLES.USER);
+  //   } else if (formData.username === "admin" && formData.password === "admin") {
+  //     setUser("ADMIN_YOUSEF");
+  //     setRole(ROLES.ADMIN);
+  //   } else console.log("Incorrect Sign up !!");
+  // };
 
   const handleOnChangeInput = ({ target: { name, value } }) => {
     setFormData((prev) => ({
