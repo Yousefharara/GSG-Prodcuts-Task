@@ -1,10 +1,13 @@
 export const PATHS = {
   HOME: "/",
+  ABOUT: "/about",
+  LOIGN: "/login",
+  SIGNUP: "/signup",
   PRODUCT: {
     ROOT: "/products",
-    VIEW: "/product/:id",
-    EDIT: "/product/:id/edit",
-    CRAETE: "/product/create",
+    VIEW: "/products/:id",
+    EDIT: "/products/:id/edit",
+    CRAETE: "/products/create",
   },
   ADMIN: {
     ROOT: "/admin",

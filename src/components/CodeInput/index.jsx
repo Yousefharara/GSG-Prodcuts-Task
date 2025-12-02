@@ -37,7 +37,7 @@ const INPUT_DATA = [
 let SUCCESS_CODE = "You123";
 
 const CodeInput = () => {
-  const [eleRefs, setEleRefs] = useState([]);
+  // const [eleRefs, setEleRefs] = useState([]);
   const [inputs, setInputs] = useState([]);
   const [code, setCode] = useState("");
   const refs = useRef([]);
@@ -53,7 +53,7 @@ const CodeInput = () => {
   }, []);
 
   useEffect(() => {
-    // ! Foundation just one time
+    // ! createRef() It using in Class Component
     // setEleRefs(INPUT_DATA.map((_) => createRef(null)));
     setInputs(
       INPUT_DATA.map((item) => ({
@@ -68,7 +68,7 @@ const CodeInput = () => {
   useEffect(() => {
     // eleRefs[0]?.current.focus();
     refs?.current[0].focus();
-  }, [eleRefs]);
+  }, []);
 
   useEffect(() => {
     let messageCode = "";
@@ -107,7 +107,7 @@ const CodeInput = () => {
             }}
             key={input.id}
             // ref={eleRefs[input.id - 1]}
-            ref={(ref) => (refs.current[input.id-1] = ref)}
+            ref={(ref) => (refs.current[input.id - 1] = ref)}
             value={inputs[input.id - 1]?.value || ""}
             type={input.type}
             onChange={handleOnChange}

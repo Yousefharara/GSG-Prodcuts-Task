@@ -1,11 +1,17 @@
 import MainLayout from "./components/MainLayout";
+import AuthProvider from "./context/AuthContext";
+import ThemeProvider from "./context/ThemeContext";
 import Router from "./router";
 
 const App = () => {
   return (
-    <MainLayout>
-      <Router />
-    </MainLayout>
+    <ThemeProvider>
+      <AuthProvider>
+        <MainLayout>
+          <Router />
+        </MainLayout>
+      </AuthProvider>
+    </ThemeProvider>
   );
 };
 

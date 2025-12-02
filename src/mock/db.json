@@ -3,7 +3,7 @@
     {
       "id": "1",
       "title": "Lenovo Legion5 pro",
-      "price": "1800"
+      "price": "1100"
     },
     {
       "id": "2",
@@ -12,13 +12,8 @@
     },
     {
       "id": "06da",
-      "title": "HP probook  2024",
-      "price": "1350"
-    },
-    {
-      "id": "d11b",
-      "title": "Asus TUF gaming",
-      "price": "9000"
+      "title": "HP probook  2028",
+      "price": "1050"
     }
   ]
 }

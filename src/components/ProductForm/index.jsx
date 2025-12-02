@@ -29,7 +29,7 @@ const ProductForm = ({ handleOnSubmit, data, isLoading }) => {
     const { name, value } = e.target;
     setProduct((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
     console.log(product);
   };

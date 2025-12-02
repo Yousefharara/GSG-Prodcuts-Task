@@ -32,7 +32,7 @@
 .code__input .input input.success__code {
   border-color: #219c4a;
   position: relative;
-  animation: animate__success .4s ease-in-out calc(var(--i) * .1s) 1;
+  animation: animate__success 0.4s ease-in-out calc(var(--i) * 0.1s) 1;
   /* animation: name duration timing-function delay iteration-count direction fill-mode; */
 }
 .code__input .input input.success__code:focus {
@@ -56,10 +56,9 @@
   0% {
     top: -20px;
     border-color: #00e94e;
-    
-}
-100% {
-      border-color: #219c4a;
+  }
+  100% {
+    border-color: #219c4a;
     top: 0px;
   }
 }
