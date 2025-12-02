@@ -1,43 +1,89 @@
 .code__input {
-    padding: 1rem;
+  padding: 1rem;
 }
 
 .code__input .input {
-    width: 250px;
-    display: flex;
-    gap: 10px;
+  width: 250px;
+  display: flex;
+  gap: 10px;
+}
+
+:root {
+  --primary-clr: #37219c;
 }
 
 .code__input .input input:focus {
-    outline: 1px solid #37219c;
-    
+  outline: 1px solid var(--primary-clr);
 }
 
 .code__input .input input {
-    padding: 8px;
-    border-radius: 8px;
-    border: 1px solid #888;
-    width: 50px;
-    height: 50px;
-    font-size: 30px;
-    letter-spacing: 5px;
-    text-align: center;
-    caret-color: transparent;
-    pointer-events: none;
+  padding: 8px;
+  border-radius: 8px;
+  border: 2px solid #888;
+  width: 50px;
+  height: 50px;
+  font-size: 30px;
+  letter-spacing: 5px;
+  text-align: center;
+  caret-color: transparent;
+  pointer-events: none;
 }
 
 .code__input .input input.success__code {
-    border-color: #219c4a;
+  border-color: #219c4a;
+  position: relative;
+  animation: animate__success .4s ease-in-out calc(var(--i) * .1s) 1;
+  /* animation: name duration timing-function delay iteration-count direction fill-mode; */
 }
 .code__input .input input.success__code:focus {
-    border-color: #219c4a;
-    outline-color: #219c4a;
+  border-color: #219c4a;
+  outline-color: #219c4a;
 }
 
 .code__input .input input.fail__code {
-    border-color: #9c2121;
+  border-color: #9c2121;
+  position: relative;
+
+  animation: animate__err 0.8s ease-in-out 1;
+  /* animation: name duration timing-function delay iteration-count direction fill-mode; */
 }
 .code__input .input input.fail__code:focus {
-    border-color: #9c2121;
-    outline-color: #9c2121;
+  border-color: #9c2121;
+  outline-color: #9c2121;
+}
+
+@keyframes animate__success {
+  0% {
+    top: -20px;
+    border-color: #00e94e;
+    
+}
+100% {
+      border-color: #219c4a;
+    top: 0px;
+  }
+}
+
+@keyframes animate__err {
+  0% {
+    left: 50px;
+  }
+  17% {
+    left: -50px;
+  }
+  34% {
+    left: 30px;
+  }
+  51% {
+    left: -30px;
+  }
+  68% {
+    left: 15px;
+  }
+  85% {
+    left: -15px;
+  }
+  100% {
+    left: 0;
+  }
 }

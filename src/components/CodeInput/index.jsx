@@ -1,4 +1,4 @@
-import { createRef, useEffect, useState } from "react";
+import { createRef, useEffect, useRef, useState } from "react";
 import "./style.css";
 
 const INPUT_DATA = [
@@ -40,6 +40,13 @@ const CodeInput = () => {
   const [eleRefs, setEleRefs] = useState([]);
   const [inputs, setInputs] = useState([]);
   const [code, setCode] = useState("");
+  const refs = useRef([]);
+  // ? refs  = {current: []}
+
+  // ? refs.current[0] = input1
+  // ? refs.current[1] = input2
+  // ? refs.current[2] = input3
+  // ? refs.current[3] = input4
 
   useEffect(() => {
     SUCCESS_CODE = "Yousef";
@@ -47,7 +54,7 @@ const CodeInput = () => {
 
   useEffect(() => {
     // ! Foundation just one time
-    setEleRefs(INPUT_DATA.map((_) => createRef(null)));
+    // setEleRefs(INPUT_DATA.map((_) => createRef(null)));
     setInputs(
       INPUT_DATA.map((item) => ({
         id: item.id,
@@ -56,8 +63,11 @@ const CodeInput = () => {
     );
   }, []);
 
+  // console.log(refs);
+
   useEffect(() => {
-    eleRefs[0]?.current.focus();
+    // eleRefs[0]?.current.focus();
+    refs?.current[0].focus();
   }, [eleRefs]);
 
   useEffect(() => {
@@ -77,9 +87,13 @@ const CodeInput = () => {
     );
 
     if (!value) {
-      eleRefs[Number(+id - 2)]?.current.focus();
+      // eleRefs[Number(+id - 2)]?.current.focus();
+      // * name = 4, before id - 2 = 2 (ele 3) ~~ name = 3, before id - 2 = 1 (ele2)
+      refs?.current[Number(+id - 2)]?.focus();
     } else {
-      eleRefs[Number(+id)]?.current.focus();
+      // eleRefs[Number(+id)]?.current.focus();
+      // * name = 2, after id = 2 (ele3) ~~ name = 3, after id = 3 (ele4)
+      refs?.current[Number(+id)]?.focus();
     }
   };
 
@@ -88,8 +102,12 @@ const CodeInput = () => {
       <div className="input">
         {INPUT_DATA.map((input) => (
           <input
+            style={{
+              "--i": input.id - 1,
+            }}
             key={input.id}
-            ref={eleRefs[input.id - 1]}
+            // ref={eleRefs[input.id - 1]}
+            ref={(ref) => (refs.current[input.id-1] = ref)}
             value={inputs[input.id - 1]?.value || ""}
             type={input.type}
             onChange={handleOnChange}
