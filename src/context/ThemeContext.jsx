@@ -13,7 +13,7 @@ const ThemeProvider = ({ children }) => {
   );
 
   const handleToggleTheme = () => {
-    setTheme(theme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT);
+    setTheme((prev) => (prev === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT));
     console.log(localStorage.getItem("theme"));
   };
 

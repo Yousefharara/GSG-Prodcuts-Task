@@ -47,7 +47,7 @@ const Header = () => {
           )}
           <li>
             <button onClick={handleToggleTheme}>
-              {theme === THEMES.LIGHT ? "Light" : "Dark"} Mode
+              {theme === THEMES.DARK ? "Light" : "Dark"} Mode
             </button>
           </li>
         </ul>
