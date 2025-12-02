@@ -13,7 +13,7 @@ const EditProductPage = () => {
 
   useEffect(() => {
     getById(id);
-  }, [id]);
+  }, []);
 
   const handleEdit = async (data) => {
     patch(id, data, PATHS.PRODUCT.ROOT);
