@@ -1,4 +1,9 @@
 
+header.DARK {
+    background-color: #100C21;
+    color: #dff;
+}
+
 header {
     width: 100%;
     padding: .5rem 1rem;
@@ -25,4 +30,6 @@ header nav ul {
     list-style: none;
 }
 
-
+header nav ul li a.active {
+    text-decoration: underline;
+}
